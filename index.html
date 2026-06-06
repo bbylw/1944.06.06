@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400;500&family=Cinzel:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@300;400&family=Cinzel:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -146,6 +146,10 @@
         50% {
           opacity: 1;
         }
+      }
+      .ordinal {
+        font-size: 0.7em;
+        margin-left: 4px;
       }
 
       /* ============================================
@@ -458,6 +462,24 @@
         width: 100%;
         height: 100%;
       }
+      .beach-marker {
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+      .beach-marker circle,
+      .beach-marker text {
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+      .beach-marker.is-active circle:first-child {
+        transform: scale(1.35);
+      }
+      .beach-marker.is-active text {
+        opacity: 1;
+      }
 
       .beach-list {
         display: flex;
@@ -479,7 +501,13 @@
       .beach:hover {
         padding-left: 16px;
       }
+      .beach.is-active {
+        padding-left: 16px;
+      }
       .beach:hover .beach-name {
+        color: var(--bronze);
+      }
+      .beach.is-active .beach-name {
         color: var(--bronze);
       }
 
@@ -560,6 +588,15 @@
         color: var(--bronze);
         vertical-align: -0.1em;
       }
+      .tribute-section-head {
+        text-align: left;
+      }
+      .tribute-en {
+        font-family: var(--serif);
+        color: var(--ink-dim);
+        font-size: 0.85em;
+        letter-spacing: 0.05em;
+      }
 
       /* ============================================
      Footer
@@ -582,6 +619,14 @@
       }
       .foot-mark {
         color: var(--bronze);
+      }
+      .foot-source {
+        flex-basis: 100%;
+        padding-top: 10px;
+        border-top: 1px solid var(--line-soft);
+        color: var(--ink-faint);
+        font-size: 10px;
+        line-height: 1.8;
       }
 
       /* ============================================
@@ -660,6 +705,115 @@
           text-align: left;
         }
       }
+
+      @media (max-width: 560px) {
+        .frame {
+          padding: 0 18px;
+        }
+        .topbar {
+          align-items: flex-start;
+          gap: 8px;
+          padding: 14px 18px;
+          font-size: 9px;
+          letter-spacing: 0.16em;
+        }
+        .topbar > div:last-child {
+          display: none;
+        }
+        .hero {
+          min-height: auto;
+          padding: 116px 0 64px;
+        }
+        .eyebrow {
+          align-items: flex-start;
+          font-size: 10px;
+          letter-spacing: 0.22em;
+          line-height: 1.8;
+          margin-bottom: 28px;
+        }
+        .eyebrow::before {
+          width: 22px;
+          margin-top: 0.85em;
+          flex: 0 0 auto;
+        }
+        .date-display {
+          font-size: clamp(52px, 17vw, 78px);
+        }
+        .date-sub {
+          flex-wrap: wrap;
+          gap: 8px 16px;
+          font-size: 16px;
+          letter-spacing: 0.22em;
+          margin-bottom: 36px;
+        }
+        .hero-statement {
+          padding-left: 18px;
+          font-size: 18px;
+        }
+        section,
+        .quote-section {
+          padding: 72px 0;
+        }
+        .section-head {
+          margin-bottom: 48px;
+        }
+        .quote {
+          font-size: 25px;
+          max-width: 12em;
+        }
+        .quote::before,
+        .quote::after {
+          height: 42px;
+        }
+        .stats {
+          grid-template-columns: 1fr;
+        }
+        .stat,
+        .stat:nth-child(2) {
+          border-right: none;
+        }
+        .stat {
+          padding: 34px 22px;
+          border-bottom: 1px solid var(--line);
+        }
+        .stat:last-child {
+          border-bottom: none;
+        }
+        .map-wrap {
+          padding: 16px;
+        }
+        .beach {
+          grid-template-columns: 44px 1fr;
+          gap: 18px;
+          padding: 22px 0;
+        }
+        .beach-code {
+          font-size: 26px;
+        }
+        .beach-name {
+          font-size: 18px;
+        }
+        .beach-meta {
+          font-size: 10px;
+          letter-spacing: 0.14em;
+        }
+        .tribute {
+          padding: 88px 0 72px;
+        }
+        .tribute-num {
+          font-size: clamp(56px, 17vw, 86px);
+        }
+        .tribute-label {
+          font-size: 14px;
+          letter-spacing: 0.18em;
+          margin-bottom: 42px;
+        }
+        footer {
+          padding: 42px 0 36px;
+          font-size: 10px;
+          letter-spacing: 0.18em;
+        }
+      }
     </style>
   </head>
   <body>
@@ -670,8 +824,7 @@
         <span>IN MEMORIAM · 1944 — 2026</span>
       </div>
       <div>
-        82<sup style="font-size: 0.7em; margin-left: 4px">nd</sup
-        >&nbsp;ANNIVERSARY
+        82<sup class="ordinal">nd</sup>&nbsp;ANNIVERSARY
       </div>
     </header>
 
@@ -784,6 +937,8 @@
               class="map-svg"
               viewBox="0 0 400 560"
               xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="诺曼底登陆五处海滩示意图：Utah、Omaha、Gold、Juno、Sword"
             >
               <!-- Sea -->
               <defs>
@@ -1076,7 +1231,7 @@
           </div>
 
           <div class="beach-list reveal">
-            <div class="beach">
+            <div class="beach" data-name="Utah">
               <div class="beach-code">U</div>
               <div class="beach-body">
                 <div class="beach-name">犹他海滩 · Utah Beach</div>
@@ -1084,7 +1239,7 @@
               </div>
               <div class="beach-force">伤亡最轻</div>
             </div>
-            <div class="beach">
+            <div class="beach" data-name="Omaha">
               <div class="beach-code">O</div>
               <div class="beach-body">
                 <div class="beach-name">奥马哈海滩 · Omaha Beach</div>
@@ -1092,7 +1247,7 @@
               </div>
               <div class="beach-force">伤亡最重</div>
             </div>
-            <div class="beach">
+            <div class="beach" data-name="Gold">
               <div class="beach-code">G</div>
               <div class="beach-body">
                 <div class="beach-name">黄金海滩 · Gold Beach</div>
@@ -1100,7 +1255,7 @@
               </div>
               <div class="beach-force">英军主力</div>
             </div>
-            <div class="beach">
+            <div class="beach" data-name="Juno">
               <div class="beach-code">J</div>
               <div class="beach-body">
                 <div class="beach-name">朱诺海滩 · Juno Beach</div>
@@ -1108,7 +1263,7 @@
               </div>
               <div class="beach-force">加军主攻</div>
             </div>
-            <div class="beach">
+            <div class="beach" data-name="Sword">
               <div class="beach-code">S</div>
               <div class="beach-body">
                 <div class="beach-name">宝剑海滩 · Sword Beach</div>
@@ -1124,7 +1279,7 @@
     <!-- Tribute -->
     <section class="tribute">
       <div class="frame">
-        <div class="section-head reveal" style="text-align: left">
+        <div class="section-head tribute-section-head reveal">
           <div class="section-tag">III · 铭记</div>
           <h2 class="section-title">
             <span class="en">We Will Remember</span>
@@ -1148,14 +1303,7 @@
               >感激</span
             >他们 为子孙后代赢得的自由。
           </p>
-          <p
-            style="
-              font-family: var(--serif);
-              color: var(--ink-dim);
-              font-size: 0.85em;
-              letter-spacing: 0.05em;
-            "
-          >
+          <p class="tribute-en">
             Today, we honor their courage, remember their sacrifice,<br />
             and remain forever grateful for the freedom<br />
             they won for generations to come.
@@ -1169,9 +1317,13 @@
         <div class="foot-grid">
           <div class="foot-mark">LEST WE FORGET · 永志不忘</div>
           <div>
-            2026 · D-DAY 82<sup style="font-size: 0.7em">nd</sup> ANNIVERSARY
+            2026 · D-DAY 82<sup class="ordinal">nd</sup> ANNIVERSARY
           </div>
           <div>诺曼底登陆 · OPERATION OVERLORD</div>
+          <div class="foot-source">
+            Figures are rounded historical estimates. References: National WWII Museum,
+            Imperial War Museums, Encyclopaedia Britannica.
+          </div>
         </div>
       </div>
     </footer>
@@ -1193,35 +1345,22 @@
       document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
       // Beach hover link
-      document.querySelectorAll(".beach-marker").forEach((marker) => {
-        const name = marker.getAttribute("data-name");
-        marker.style.cursor = "pointer";
-        marker.addEventListener("mouseenter", () => {
-          const target = Array.from(document.querySelectorAll(".beach")).find(
-            (b) =>
-              b
-                .querySelector(".beach-name")
-                .textContent.toLowerCase()
-                .includes(name.toLowerCase()),
-          );
-          if (target) {
-            target.style.paddingLeft = "16px";
-            target.querySelector(".beach-name").style.color = "var(--bronze)";
-          }
-        });
-        marker.addEventListener("mouseleave", () => {
-          const target = Array.from(document.querySelectorAll(".beach")).find(
-            (b) =>
-              b
-                .querySelector(".beach-name")
-                .textContent.toLowerCase()
-                .includes(name.toLowerCase()),
-          );
-          if (target) {
-            target.style.paddingLeft = "0px";
-            target.querySelector(".beach-name").style.color = "";
-          }
-        });
+      const beachMarkers = document.querySelectorAll(".beach-marker");
+      const beachItems = document.querySelectorAll(".beach");
+
+      const setBeachActive = (name, active) => {
+        document
+          .querySelector(`.beach-marker[data-name="${name}"]`)
+          ?.classList.toggle("is-active", active);
+        document
+          .querySelector(`.beach[data-name="${name}"]`)
+          ?.classList.toggle("is-active", active);
+      };
+
+      [...beachMarkers, ...beachItems].forEach((el) => {
+        const name = el.getAttribute("data-name");
+        el.addEventListener("mouseenter", () => setBeachActive(name, true));
+        el.addEventListener("mouseleave", () => setBeachActive(name, false));
       });
     </script>
   </body>
