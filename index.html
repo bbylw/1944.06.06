@@ -1,0 +1,1228 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D-Day · 诺曼底登陆 82 周年纪念</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400;500&family=Cinzel:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============================================
+     Design Tokens — Memorial / Editorial
+     ============================================ */
+      :root {
+        --bg: #0a0d14;
+        --bg-2: #0f131c;
+        --surface: #141925;
+        --ink: #e8e2d3;
+        --ink-dim: #8a8579;
+        --ink-faint: #4a463d;
+        --bronze: #c9a961;
+        --bronze-soft: #8a7440;
+        --blood: #8b3a3a;
+        --line: rgba(201, 169, 97, 0.18);
+        --line-soft: rgba(201, 169, 97, 0.08);
+
+        --serif: "Cormorant Garamond", "Noto Serif SC", serif;
+        --serif-cn: "Noto Serif SC", "Songti SC", "STSong", serif;
+        --sans-cn: "Noto Sans SC", sans-serif;
+        --mono: "JetBrains Mono", "Menlo", monospace;
+        --display: "Cinzel", "Cormorant Garamond", serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--sans-cn);
+        font-weight: 300;
+        line-height: 1.7;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      /* Subtle film grain */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 100;
+        opacity: 0.05;
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      }
+
+      /* Vignette */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        background: radial-gradient(
+          ellipse at center,
+          transparent 40%,
+          rgba(0, 0, 0, 0.55) 100%
+        );
+      }
+
+      ::selection {
+        background: var(--bronze);
+        color: var(--bg);
+      }
+
+      /* ============================================
+     Layout
+     ============================================ */
+      .frame {
+        position: relative;
+        z-index: 2;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 clamp(20px, 4vw, 64px);
+      }
+
+      /* ============================================
+     Top bar
+     ============================================ */
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px clamp(20px, 4vw, 64px);
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        color: var(--ink-dim);
+        text-transform: uppercase;
+        background: linear-gradient(
+          180deg,
+          rgba(10, 13, 20, 0.85),
+          rgba(10, 13, 20, 0)
+        );
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .topbar .mark {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .topbar .mark-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--bronze);
+        border-radius: 50%;
+        box-shadow: 0 0 8px var(--bronze);
+        animation: pulse 2.5s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* ============================================
+     Hero
+     ============================================ */
+      .hero {
+        min-height: 100dvh;
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        position: relative;
+        padding: 140px 0 80px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: clamp(40px, 6vw, 100px);
+        align-items: end;
+      }
+
+      .hero-left {
+        position: relative;
+      }
+
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.35em;
+        color: var(--bronze);
+        text-transform: uppercase;
+        margin-bottom: 36px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 32px;
+        height: 1px;
+        background: var(--bronze);
+      }
+
+      .date-display {
+        font-family: var(--display);
+        font-size: clamp(80px, 14vw, 200px);
+        font-weight: 500;
+        line-height: 0.85;
+        color: var(--ink);
+        letter-spacing: -0.04em;
+        margin-bottom: 8px;
+      }
+      .date-display .dot {
+        color: var(--bronze);
+        margin: 0 -0.05em;
+      }
+
+      .date-sub {
+        display: flex;
+        align-items: baseline;
+        gap: 24px;
+        font-family: var(--serif-cn);
+        font-weight: 300;
+        color: var(--ink-dim);
+        font-size: clamp(18px, 1.6vw, 24px);
+        letter-spacing: 0.4em;
+        margin-bottom: 48px;
+      }
+      .date-sub .num {
+        font-family: var(--display);
+        color: var(--bronze);
+        font-size: 0.7em;
+        letter-spacing: 0.1em;
+      }
+
+      .hero-statement {
+        font-family: var(--serif-cn);
+        font-weight: 300;
+        font-size: clamp(20px, 1.7vw, 26px);
+        line-height: 1.9;
+        color: var(--ink);
+        max-width: 36ch;
+        border-left: 1px solid var(--bronze);
+        padding-left: 28px;
+      }
+      .hero-statement em {
+        font-style: normal;
+        color: var(--bronze);
+      }
+
+      /* Right column: 82 周年 vertical seal */
+      .hero-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+        gap: 32px;
+        position: relative;
+        align-self: stretch;
+      }
+
+      .seal {
+        writing-mode: vertical-rl;
+        -webkit-writing-mode: vertical-rl;
+        text-orientation: upright;
+        font-family: var(--serif-cn);
+        font-weight: 500;
+        font-size: clamp(22px, 2vw, 30px);
+        letter-spacing: 0.4em;
+        color: var(--ink);
+        border-left: 1px solid var(--line);
+        padding-left: 28px;
+        line-height: 1.4;
+        text-align: left;
+        align-self: flex-end;
+      }
+      .seal .accent {
+        color: var(--bronze);
+        font-weight: 700;
+        font-size: 1.4em;
+        letter-spacing: 0.15em;
+      }
+
+      .meta-coord {
+        text-align: right;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        color: var(--ink-dim);
+        line-height: 2;
+      }
+      .meta-coord span {
+        color: var(--bronze);
+      }
+
+      /* ============================================
+     Section base
+     ============================================ */
+      section {
+        position: relative;
+        padding: clamp(80px, 10vw, 140px) 0;
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 60px;
+        align-items: start;
+        margin-bottom: 80px;
+        border-top: 1px solid var(--line);
+        padding-top: 32px;
+      }
+      .section-tag {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.3em;
+        color: var(--bronze);
+        text-transform: uppercase;
+      }
+      .section-title {
+        font-family: var(--serif-cn);
+        font-weight: 400;
+        font-size: clamp(32px, 4vw, 56px);
+        line-height: 1.2;
+        letter-spacing: 0.02em;
+        color: var(--ink);
+      }
+      .section-title .en {
+        display: block;
+        font-family: var(--display);
+        font-weight: 400;
+        font-size: 0.45em;
+        letter-spacing: 0.3em;
+        color: var(--ink-dim);
+        margin-bottom: 12px;
+        text-transform: uppercase;
+      }
+
+      /* ============================================
+     Quote
+     ============================================ */
+      .quote-section {
+        text-align: center;
+        padding: clamp(100px, 14vw, 180px) 0;
+      }
+      .quote {
+        font-family: var(--serif-cn);
+        font-weight: 300;
+        font-size: clamp(28px, 3.5vw, 48px);
+        line-height: 1.6;
+        color: var(--ink);
+        max-width: 22ch;
+        margin: 0 auto;
+        letter-spacing: 0.05em;
+      }
+      .quote::before,
+      .quote::after {
+        content: "";
+        display: block;
+        width: 1px;
+        height: 60px;
+        background: var(--bronze);
+        margin: 0 auto 40px;
+      }
+      .quote::after {
+        margin: 40px auto 0;
+      }
+      .quote .accent {
+        color: var(--bronze);
+      }
+      .quote-attr {
+        margin-top: 40px;
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 0.3em;
+        color: var(--ink-dim);
+        text-transform: uppercase;
+      }
+      .quote-attr strong {
+        color: var(--bronze);
+        font-weight: 500;
+      }
+
+      /* ============================================
+     Stats
+     ============================================ */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .stat {
+        padding: 48px 32px;
+        border-right: 1px solid var(--line);
+        position: relative;
+      }
+      .stat:last-child {
+        border-right: none;
+      }
+      .stat-num {
+        font-family: var(--display);
+        font-size: clamp(48px, 5vw, 72px);
+        font-weight: 500;
+        color: var(--bronze);
+        line-height: 1;
+        margin-bottom: 20px;
+        letter-spacing: -0.02em;
+      }
+      .stat-num small {
+        font-size: 0.4em;
+        color: var(--ink-dim);
+        font-family: var(--mono);
+        margin-left: 4px;
+        letter-spacing: 0.1em;
+      }
+      .stat-label {
+        font-family: var(--serif-cn);
+        font-size: 16px;
+        color: var(--ink);
+        margin-bottom: 6px;
+        font-weight: 400;
+      }
+      .stat-en {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--ink-faint);
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+      }
+
+      /* ============================================
+     Map / Beaches
+     ============================================ */
+      .beaches {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(40px, 6vw, 100px);
+        align-items: center;
+      }
+      .map-wrap {
+        position: relative;
+        aspect-ratio: 1 / 1.4;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        padding: 24px;
+      }
+      .map-wrap::before {
+        content: "NORMANDY · 诺曼底";
+        position: absolute;
+        top: 16px;
+        left: 24px;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        color: var(--ink-dim);
+      }
+      .map-wrap::after {
+        content: "49°21′N · 0°50′W";
+        position: absolute;
+        bottom: 16px;
+        right: 24px;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        color: var(--ink-dim);
+      }
+      .map-svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .beach-list {
+        display: flex;
+        flex-direction: column;
+      }
+      .beach {
+        display: grid;
+        grid-template-columns: 80px 1fr auto;
+        align-items: center;
+        gap: 28px;
+        padding: 28px 0;
+        border-bottom: 1px solid var(--line-soft);
+        cursor: pointer;
+        transition: padding-left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .beach:first-child {
+        border-top: 1px solid var(--line-soft);
+      }
+      .beach:hover {
+        padding-left: 16px;
+      }
+      .beach:hover .beach-name {
+        color: var(--bronze);
+      }
+
+      .beach-code {
+        font-family: var(--display);
+        font-size: 32px;
+        font-weight: 600;
+        color: var(--ink);
+        letter-spacing: 0.05em;
+      }
+      .beach-name {
+        font-family: var(--serif-cn);
+        font-size: 20px;
+        font-weight: 400;
+        color: var(--ink);
+        margin-bottom: 4px;
+        transition: color 0.3s ease;
+      }
+      .beach-meta {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        color: var(--ink-dim);
+        text-transform: uppercase;
+      }
+      .beach-force {
+        font-family: var(--serif-cn);
+        font-size: 13px;
+        color: var(--ink-dim);
+        text-align: right;
+        letter-spacing: 0.1em;
+      }
+
+      /* ============================================
+     Sacrifice / Tribute
+     ============================================ */
+      .tribute {
+        text-align: center;
+        padding: clamp(120px, 16vw, 200px) 0 clamp(80px, 10vw, 120px);
+      }
+      .tribute-num {
+        font-family: var(--display);
+        font-size: clamp(120px, 18vw, 240px);
+        font-weight: 500;
+        color: var(--ink);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        margin-bottom: 8px;
+      }
+      .tribute-num .slash {
+        color: var(--blood);
+      }
+      .tribute-label {
+        font-family: var(--serif-cn);
+        font-size: 18px;
+        color: var(--ink-dim);
+        letter-spacing: 0.3em;
+        margin-bottom: 60px;
+      }
+      .tribute-body {
+        max-width: 640px;
+        margin: 0 auto;
+        font-family: var(--serif-cn);
+        font-size: clamp(20px, 1.8vw, 26px);
+        line-height: 2;
+        color: var(--ink);
+        font-weight: 300;
+      }
+      .tribute-body p {
+        margin-bottom: 1.4em;
+      }
+      .tribute-body .accent {
+        color: var(--bronze);
+      }
+      .tribute-body .quote-mark {
+        font-family: var(--serif);
+        font-size: 1.4em;
+        color: var(--bronze);
+        vertical-align: -0.1em;
+      }
+
+      /* ============================================
+     Footer
+     ============================================ */
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 60px 0 50px;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.25em;
+        color: var(--ink-dim);
+        text-transform: uppercase;
+      }
+      .foot-grid {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .foot-mark {
+        color: var(--bronze);
+      }
+
+      /* ============================================
+     Scroll reveal
+     ============================================ */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ============================================
+     Reduced motion
+     ============================================ */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ============================================
+     Mobile
+     ============================================ */
+      @media (max-width: 900px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-right {
+          align-items: flex-start;
+        }
+        .seal {
+          writing-mode: horizontal-tb;
+          border-left: none;
+          border-bottom: 1px solid var(--line);
+          padding-left: 0;
+          padding-bottom: 20px;
+        }
+        .meta-coord {
+          text-align: left;
+        }
+        .section-head {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        .stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .stat:nth-child(2) {
+          border-right: none;
+        }
+        .stat:nth-child(1),
+        .stat:nth-child(2) {
+          border-bottom: 1px solid var(--line);
+        }
+        .beaches {
+          grid-template-columns: 1fr;
+        }
+        .beach {
+          grid-template-columns: 60px 1fr;
+        }
+        .beach-force {
+          grid-column: 1 / -1;
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="mark">
+        <span class="mark-dot"></span>
+        <span>IN MEMORIAM · 1944 — 2026</span>
+      </div>
+      <div>
+        82<sup style="font-size: 0.7em; margin-left: 4px">nd</sup
+        >&nbsp;ANNIVERSARY
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="frame">
+        <div class="hero-grid">
+          <div class="hero-left">
+            <div class="eyebrow reveal">
+              诺曼底登陆 · OPERATION&nbsp;OVERLORD
+            </div>
+
+            <h1 class="date-display reveal">
+              1944<span class="dot">.</span>06<span class="dot">.</span>06
+            </h1>
+
+            <div class="date-sub reveal">
+              <span>六月六日</span>
+              <span class="num">06:30</span>
+              <span>H-HOUR</span>
+            </div>
+
+            <p class="hero-statement reveal">
+              八十二年前，盟军冲上诺曼底海滩，<br />
+              踏入战争的地狱——<br />
+              <em>响应责任的召唤，为捍卫自由而战。</em>
+            </p>
+          </div>
+
+          <div class="hero-right">
+            <div class="seal reveal">
+              诺 <span class="accent">·</span> 曼
+              <span class="accent">·</span> 底
+            </div>
+            <div class="meta-coord reveal">
+              49°21'N · 0°50'W<br />
+              <span>FRANCE</span><br />
+              ENGLISH CHANNEL
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="quote-section">
+      <div class="frame">
+        <p class="quote reveal">
+          你们即将踏上<span class="accent">伟大的远征</span>，<br />
+          世界的目光注视着你们，<br />
+          自由的人们祈祷着与你们同在。
+        </p>
+        <p class="quote-attr reveal">
+          — <strong>德怀特·D·艾森豪威尔</strong><br />
+          致盟军远征军 · 1944.06.06
+        </p>
+      </div>
+    </section>
+
+    <!-- Operation stats -->
+    <section>
+      <div class="frame">
+        <div class="section-head reveal">
+          <div class="section-tag">I · 行动</div>
+          <h2 class="section-title">
+            <span class="en">Operation Overlord</span>
+            人类历史上规模最大的登陆作战
+          </h2>
+        </div>
+
+        <div class="stats reveal">
+          <div class="stat">
+            <div class="stat-num">156,000<small>人</small></div>
+            <div class="stat-label">盟军登陆兵力</div>
+            <div class="stat-en">Allied Troops</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">5,000<small>艘</small></div>
+            <div class="stat-label">海空舰船参战</div>
+            <div class="stat-en">Vessels Engaged</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">5<small>处</small></div>
+            <div class="stat-label">诺曼底海滩</div>
+            <div class="stat-en">Normandy Beaches</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">D+1<small>日</small></div>
+            <div class="stat-label">开启欧洲解放</div>
+            <div class="stat-en">Liberation Begins</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beaches & Map -->
+    <section>
+      <div class="frame">
+        <div class="section-head reveal">
+          <div class="section-tag">II · 海滩</div>
+          <h2 class="section-title">
+            <span class="en">The Five Beaches</span>
+            鲜血浸染的八十二公里海岸线
+          </h2>
+        </div>
+
+        <div class="beaches">
+          <div class="map-wrap reveal">
+            <svg
+              class="map-svg"
+              viewBox="0 0 400 560"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <!-- Sea -->
+              <defs>
+                <radialGradient id="seaGrad" cx="50%" cy="100%" r="100%">
+                  <stop offset="0%" stop-color="#1a2233" />
+                  <stop offset="100%" stop-color="#0a0d14" />
+                </radialGradient>
+                <linearGradient id="landGrad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#1f2433" />
+                  <stop offset="100%" stop-color="#161a25" />
+                </linearGradient>
+                <pattern
+                  id="grid"
+                  width="40"
+                  height="40"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <path
+                    d="M 40 0 L 0 0 0 40"
+                    fill="none"
+                    stroke="rgba(201,169,97,0.04)"
+                    stroke-width="0.5"
+                  />
+                </pattern>
+              </defs>
+
+              <!-- Background -->
+              <rect width="400" height="560" fill="url(#seaGrad)" />
+              <rect width="400" height="560" fill="url(#grid)" />
+
+              <!-- Land mass (France coast) -->
+              <path
+                d="M 0,0
+                   L 400,0
+                   L 400,180
+                   C 360,200 340,220 310,240
+                   C 280,260 240,290 200,310
+                   C 160,330 120,360 80,400
+                   C 50,430 20,470 0,500
+                   Z"
+                fill="url(#landGrad)"
+                stroke="rgba(201,169,97,0.25)"
+                stroke-width="0.5"
+              />
+
+              <!-- Land hatch -->
+              <g opacity="0.15" stroke="#c9a961" stroke-width="0.4" fill="none">
+                <path
+                  d="M 50,80 L 60,70 M 70,90 L 80,80 M 90,100 L 100,90 M 110,110 L 120,100 M 130,120 L 140,110"
+                />
+                <path
+                  d="M 200,60 L 210,50 M 220,70 L 230,60 M 240,80 L 250,70 M 260,90 L 270,80 M 280,100 L 290,90"
+                />
+                <path
+                  d="M 100,180 L 115,165 M 130,190 L 145,175 M 160,200 L 175,185 M 190,210 L 205,195"
+                />
+                <path
+                  d="M 60,300 L 80,280 M 90,310 L 110,290 M 120,320 L 140,300 M 150,330 L 170,310"
+                />
+              </g>
+
+              <!-- Coastline (highlight) -->
+              <path
+                d="M 0,500
+                   C 20,470 50,430 80,400
+                   C 120,360 160,330 200,310
+                   C 240,290 280,260 310,240
+                   C 340,220 360,200 400,180"
+                fill="none"
+                stroke="rgba(201,169,97,0.5)"
+                stroke-width="0.8"
+                stroke-dasharray="2 3"
+              />
+
+              <!-- Beach segments -->
+              <!-- Utah -->
+              <g class="beach-marker" data-name="Utah">
+                <circle cx="60" cy="465" r="5" fill="#c9a961" />
+                <circle
+                  cx="60"
+                  cy="465"
+                  r="12"
+                  fill="none"
+                  stroke="#c9a961"
+                  stroke-width="0.5"
+                  opacity="0.5"
+                />
+                <text
+                  x="60"
+                  y="445"
+                  fill="#e8e2d3"
+                  font-family="Cinzel, serif"
+                  font-size="11"
+                  text-anchor="middle"
+                  font-weight="500"
+                >
+                  UTAH
+                </text>
+                <text
+                  x="60"
+                  y="490"
+                  fill="#8a8579"
+                  font-family="JetBrains Mono"
+                  font-size="7"
+                  text-anchor="middle"
+                  letter-spacing="0.1em"
+                >
+                  美军 · VII 军
+                </text>
+              </g>
+
+              <!-- Omaha -->
+              <g class="beach-marker" data-name="Omaha">
+                <circle cx="135" cy="400" r="6" fill="#8b3a3a" />
+                <circle
+                  cx="135"
+                  cy="400"
+                  r="14"
+                  fill="none"
+                  stroke="#8b3a3a"
+                  stroke-width="0.8"
+                  opacity="0.7"
+                />
+                <text
+                  x="135"
+                  y="378"
+                  fill="#e8e2d3"
+                  font-family="Cinzel, serif"
+                  font-size="11"
+                  text-anchor="middle"
+                  font-weight="500"
+                >
+                  OMAHA
+                </text>
+                <text
+                  x="135"
+                  y="428"
+                  fill="#8a8579"
+                  font-family="JetBrains Mono"
+                  font-size="7"
+                  text-anchor="middle"
+                  letter-spacing="0.1em"
+                >
+                  血腥奥马哈
+                </text>
+              </g>
+
+              <!-- Gold -->
+              <g class="beach-marker" data-name="Gold">
+                <circle cx="210" cy="335" r="5" fill="#c9a961" />
+                <circle
+                  cx="210"
+                  cy="335"
+                  r="12"
+                  fill="none"
+                  stroke="#c9a961"
+                  stroke-width="0.5"
+                  opacity="0.5"
+                />
+                <text
+                  x="210"
+                  y="315"
+                  fill="#e8e2d3"
+                  font-family="Cinzel, serif"
+                  font-size="11"
+                  text-anchor="middle"
+                  font-weight="500"
+                >
+                  GOLD
+                </text>
+                <text
+                  x="210"
+                  y="358"
+                  fill="#8a8579"
+                  font-family="JetBrains Mono"
+                  font-size="7"
+                  text-anchor="middle"
+                  letter-spacing="0.1em"
+                >
+                  英军
+                </text>
+              </g>
+
+              <!-- Juno -->
+              <g class="beach-marker" data-name="Juno">
+                <circle cx="270" cy="290" r="5" fill="#c9a961" />
+                <circle
+                  cx="270"
+                  cy="290"
+                  r="12"
+                  fill="none"
+                  stroke="#c9a961"
+                  stroke-width="0.5"
+                  opacity="0.5"
+                />
+                <text
+                  x="270"
+                  y="270"
+                  fill="#e8e2d3"
+                  font-family="Cinzel, serif"
+                  font-size="11"
+                  text-anchor="middle"
+                  font-weight="500"
+                >
+                  JUNO
+                </text>
+                <text
+                  x="270"
+                  y="313"
+                  fill="#8a8579"
+                  font-family="JetBrains Mono"
+                  font-size="7"
+                  text-anchor="middle"
+                  letter-spacing="0.1em"
+                >
+                  加军
+                </text>
+              </g>
+
+              <!-- Sword -->
+              <g class="beach-marker" data-name="Sword">
+                <circle cx="330" cy="245" r="5" fill="#c9a961" />
+                <circle
+                  cx="330"
+                  cy="245"
+                  r="12"
+                  fill="none"
+                  stroke="#c9a961"
+                  stroke-width="0.5"
+                  opacity="0.5"
+                />
+                <text
+                  x="330"
+                  y="225"
+                  fill="#e8e2d3"
+                  font-family="Cinzel, serif"
+                  font-size="11"
+                  text-anchor="middle"
+                  font-weight="500"
+                >
+                  SWORD
+                </text>
+                <text
+                  x="330"
+                  y="268"
+                  fill="#8a8579"
+                  font-family="JetBrains Mono"
+                  font-size="7"
+                  text-anchor="middle"
+                  letter-spacing="0.1em"
+                >
+                  英军
+                </text>
+              </g>
+
+              <!-- Channel label -->
+              <text
+                x="200"
+                y="540"
+                fill="#4a463d"
+                font-family="Cormorant Garamond"
+                font-size="11"
+                text-anchor="middle"
+                letter-spacing="0.4em"
+                font-style="italic"
+              >
+                ENGLISH CHANNEL · 英吉利海峡
+              </text>
+
+              <!-- Compass -->
+              <g transform="translate(360, 40)">
+                <circle
+                  r="18"
+                  fill="none"
+                  stroke="rgba(201,169,97,0.3)"
+                  stroke-width="0.5"
+                />
+                <path d="M 0,-14 L 3,0 L 0,14 L -3,0 Z" fill="#c9a961" />
+                <text
+                  y="-22"
+                  fill="#8a8579"
+                  font-family="JetBrains Mono"
+                  font-size="8"
+                  text-anchor="middle"
+                >
+                  N
+                </text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="beach-list reveal">
+            <div class="beach">
+              <div class="beach-code">U</div>
+              <div class="beach-body">
+                <div class="beach-name">犹他海滩 · Utah Beach</div>
+                <div class="beach-meta">美 第七军 · 圣米歇尔山</div>
+              </div>
+              <div class="beach-force">伤亡最轻</div>
+            </div>
+            <div class="beach">
+              <div class="beach-code">O</div>
+              <div class="beach-body">
+                <div class="beach-name">奥马哈海滩 · Omaha Beach</div>
+                <div class="beach-meta">美 第五军 · "血腥奥马哈"</div>
+              </div>
+              <div class="beach-force">伤亡最重</div>
+            </div>
+            <div class="beach">
+              <div class="beach-code">G</div>
+              <div class="beach-body">
+                <div class="beach-name">黄金海滩 · Gold Beach</div>
+                <div class="beach-meta">英 第三十军 · 阿罗芒什</div>
+              </div>
+              <div class="beach-force">英军主力</div>
+            </div>
+            <div class="beach">
+              <div class="beach-code">J</div>
+              <div class="beach-body">
+                <div class="beach-name">朱诺海滩 · Juno Beach</div>
+                <div class="beach-meta">加 第三军 · 贝辛</div>
+              </div>
+              <div class="beach-force">加军主攻</div>
+            </div>
+            <div class="beach">
+              <div class="beach-code">S</div>
+              <div class="beach-body">
+                <div class="beach-name">宝剑海滩 · Sword Beach</div>
+                <div class="beach-meta">英 第一军 · 乌伊斯特勒昂</div>
+              </div>
+              <div class="beach-force">最东翼</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tribute -->
+    <section class="tribute">
+      <div class="frame">
+        <div class="section-head reveal" style="text-align: left">
+          <div class="section-tag">III · 铭记</div>
+          <h2 class="section-title">
+            <span class="en">We Will Remember</span>
+            他们为自由而死，我们因自由而生
+          </h2>
+        </div>
+
+        <div class="tribute-num reveal">
+          4,400<span class="slash">/</span>9,000
+        </div>
+        <div class="tribute-label reveal">
+          盟军 阵亡 / 负伤 · 失踪 · D-DAY 当日
+        </div>
+
+        <div class="tribute-body reveal">
+          <p>
+            <span class="quote-mark">「</span>
+            今天，我们向他们的<span class="accent">勇气</span>致敬，
+            缅怀他们的<span class="accent">牺牲</span>， 并永远<span
+              class="accent"
+              >感激</span
+            >他们 为子孙后代赢得的自由。
+          </p>
+          <p
+            style="
+              font-family: var(--serif);
+              color: var(--ink-dim);
+              font-size: 0.85em;
+              letter-spacing: 0.05em;
+            "
+          >
+            Today, we honor their courage, remember their sacrifice,<br />
+            and remain forever grateful for the freedom<br />
+            they won for generations to come.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="frame">
+        <div class="foot-grid">
+          <div class="foot-mark">LEST WE FORGET · 永志不忘</div>
+          <div>
+            2026 · D-DAY 82<sup style="font-size: 0.7em">nd</sup> ANNIVERSARY
+          </div>
+          <div>诺曼底登陆 · OPERATION OVERLORD</div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Scroll reveal
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+      );
+
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Beach hover link
+      document.querySelectorAll(".beach-marker").forEach((marker) => {
+        const name = marker.getAttribute("data-name");
+        marker.style.cursor = "pointer";
+        marker.addEventListener("mouseenter", () => {
+          const target = Array.from(document.querySelectorAll(".beach")).find(
+            (b) =>
+              b
+                .querySelector(".beach-name")
+                .textContent.toLowerCase()
+                .includes(name.toLowerCase()),
+          );
+          if (target) {
+            target.style.paddingLeft = "16px";
+            target.querySelector(".beach-name").style.color = "var(--bronze)";
+          }
+        });
+        marker.addEventListener("mouseleave", () => {
+          const target = Array.from(document.querySelectorAll(".beach")).find(
+            (b) =>
+              b
+                .querySelector(".beach-name")
+                .textContent.toLowerCase()
+                .includes(name.toLowerCase()),
+          );
+          if (target) {
+            target.style.paddingLeft = "0px";
+            target.querySelector(".beach-name").style.color = "";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
